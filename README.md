@@ -55,4 +55,4 @@ The final recommendation is **randomly** chosen from a set of candidate movies, 
 - P.S. If you fail running `python manage.py runserver 8080`, try another port numbers, like 8081 or 8000.
 
 ## Credit :
-Thanks to the sourcecode: baohan08
+Thanks to the sourcecode: `baohan08`
