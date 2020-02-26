@@ -4,7 +4,6 @@ This is a movie website using **Django** as backend framework and SQLite as data
 For the current version, the following features are implemented, 
 - **Search Engine** including inverted index and LRU cache
 - User Management
-- Login via Facebook (**OAuth** with Facebook API)
 - **Recommender** according to user's taste
 
 ***
