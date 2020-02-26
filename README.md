@@ -54,5 +54,5 @@ The final recommendation is **randomly** chosen from a set of candidate movies, 
 4. Open your web browser, input `localhost:8080` in the address bar.
 - P.S. If you fail running `python manage.py runserver 8080`, try another port numbers, like 8081 or 8000.
 
-## Credit :
+## Credit
 Thanks to the sourcecode: `baohan08`
