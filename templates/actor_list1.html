@@ -1,0 +1,460 @@
+{% extends "base.html" %}
+<style>
+
+</style>
+{% block mainbody %}
+
+    <!-- about_area_start -->
+    <div class="about_area" style="padding-top: 40px;">
+            <!--<div class="shape-1 d-none d-xl-block">
+                <img src="img/about/shap1.png" alt="">
+            </div>
+            <div class="shape-2 d-none d-xl-block">
+                <img src="img/about/shap2.png" alt="">
+            </div>-->
+            <div class="container">
+            {% if object %}
+                <!--<div class="row text-right">
+                    <div class="col-xl-12">
+                        <div class="serction_title_large mb-95">
+                            <h3>
+                                {{ object.title }} ({{ object.year }}) 
+                            </h3>
+                        </div>
+                    </div>
+                </div>-->
+
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-md-6">
+                        <div class="about_thumb">
+                            <img src="{{ object.poster }}" alt="Cannot load photo, sorry!">
+                            <!--<img border="0" src="{{ object.poster }}" alt="Cannot load photo, sorry!" width="300" height="500">-->
+                        </div>
+                    </div>
+                    <div class="col-xl-5 offset-xl-1 col-md-6">
+                        <div class="about_info">
+                            <div class="section_title">
+                                <span class="sub_heading">Welcome To</span>
+                                <h1>{{ object.title }} ({{ object.year }}) </h1>
+                                <h3>The Biggest Design <br>
+                                    Conference of the <br>
+                                    Year 2019</h3>
+                            </div>
+                            <p>Our set he for firmament morning sixth subdue darkness creeping gathered divide our let god.
+                                moving. Moving in fourth air night bring upon you’re it beast.</p>
+
+                            {% if  user.is_authenticated %}
+                            <button class="boxed-btn-red" id="seen">Have seen</button>
+                            <b style="color: #f44336" id="message"></b>
+                            {% if  object.flag == 1 %}
+                                <script>
+                                    $("#seen").css({"background-color": "#f44336", "color": "white"});
+                                </script>
+                            {% endif %}
+                            {% if  object.flag == 2 %}
+                                <script>
+                                    $("#expect").css({"background-color": "#f44336", "color": "white"});
+                                </script>
+                            {% endif %}
+                <script>
+                    $(document).ready(function () {
+                        $("#seen").click(function () {
+                            $.get("/movie/add_seen/{{ object.movieid }}", function (msg) {
+                                if (msg == "1") {
+                                    $("#seen").css({"background-color": "#f44336", "color": "white"});
+                                    $("#expect").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Added to Seen list!").fadeIn("fast").fadeOut("slow");
+                                }
+                                if (msg == "0") {
+                                    $("#seen").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Deleted from Seen list!").fadeIn("fast").fadeOut("slow");
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $("#expect").click(function () {
+                            $.get("/movie/add_expect/{{ object.movieid }}", function (msg) {
+                                if (msg == "2") {
+                                    $("#expect").css({"background-color": "#f44336", "color": "white"});
+                                    $("#seen").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Added to Wish list!").fadeIn("fast").fadeOut("slow");
+                                }
+                                if (msg == "0") {
+                                    $("#expect").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Deleted from Wish list!").fadeIn("fast").fadeOut("slow");
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(function () {
+                        $('span.stars').stars();
+                    });
+                    $.fn.stars = function () {
+                        return $(this).each(function () {
+                            $(this).html($('<span />').width(Math.max(0, (Math.min(10, parseFloat($(this).html())))) * 8));
+                        });
+                    }
+
+                </script>
+
+                        {% endif %}
+        
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+        <!-- about_area_end -->
+
+    <div class="Layer" id="layer"></div>
+    <div id="container">
+        {% if object %}
+
+            <div id="detail-infro">
+                <h1>{{ object.title }} ({{ object.year }}) </h1>
+                {% if  user.is_authenticated %}
+                    <button class="add_button" id="seen">Have seen</button>
+                    <!--<button class="add_button" id="expect">Want to see</button>-->
+                    <b style="color: #f44336" id="message"></b>
+                    {% if  object.flag == 1 %}
+                        <script>
+                            $("#seen").css({"background-color": "#f44336", "color": "white"});
+                        </script>
+                    {% endif %}
+                    {% if  object.flag == 2 %}
+                        <script>
+                            $("#expect").css({"background-color": "#f44336", "color": "white"});
+                        </script>
+                    {% endif %}
+                {% endif %}
+                <script>
+                    $(document).ready(function () {
+                        $("#seen").click(function () {
+                            $.get("/movie/add_seen/{{ object.movieid }}", function (msg) {
+                                if (msg == "1") {
+                                    $("#seen").css({"background-color": "#f44336", "color": "white"});
+                                    $("#expect").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Added to Seen list!").fadeIn("fast").fadeOut("slow");
+                                }
+                                if (msg == "0") {
+                                    $("#seen").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Deleted from Seen list!").fadeIn("fast").fadeOut("slow");
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $("#expect").click(function () {
+                            $.get("/movie/add_expect/{{ object.movieid }}", function (msg) {
+                                if (msg == "2") {
+                                    $("#expect").css({"background-color": "#f44336", "color": "white"});
+                                    $("#seen").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Added to Wish list!").fadeIn("fast").fadeOut("slow");
+                                }
+                                if (msg == "0") {
+                                    $("#expect").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Deleted from Wish list!").fadeIn("fast").fadeOut("slow");
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(function () {
+                        $('span.stars').stars();
+                    });
+                    $.fn.stars = function () {
+                        return $(this).each(function () {
+                            $(this).html($('<span />').width(Math.max(0, (Math.min(10, parseFloat($(this).html())))) * 8));
+                        });
+                    }
+
+                </script>
+                <!-- Layer -->
+                {#                <div class="Layer" id="layer"></div>#}
+
+                <!--<h4 id="summary" align=""><b>Plot Summary: </b>"{{ object.plot }}"</h4>-->
+                <h4 id="summary" align="justify">{{ object.plot }}</h4>
+                <!--<p><b>Year:</b> {{ object.year }}</p>-->
+                <p><b>Genres:</b> {{ object.genres }}</p>
+                <p><b>Runtime:</b> {{ object.length }} minutes</p>
+                <span class="stars">{{ object.rate }}</span>
+                <p><b>Rating:</b> {{ object.rate }}/10</p>
+                <!--<p><a href="http://www.imdb.com/title/{{ object.movieid }}" target="_blank">See in IMDB <span
+                        class="glyphicon glyphicon-new-window"></span></a></p>-->
+                <!--<span class="click_Show"> <button class="button_trailer">
+                <span class="glyphicon glyphicon-play-circle"></span> Trailer</button>
+                </span>
+
+                <div id="TrailerWindow" style="position: fixed;">
+                    <div id="title">{{ object.title }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div id="videoControl">
+                        <video width="600" height="500" controls>
+                            <source src="{{ object.trailer }}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>-->
+
+
+            </div>
+
+            <div id="main-pic">
+                <img border="0" src="{{ object.poster }}" alt="Cannot load photo, sorry!" width="300" height="500">
+            </div>            
+        {% endif %}
+
+
+
+
+
+        <!-- speakers_start -->
+        <div class="speakers_area">
+            <h1 class="opcity_text d-none d-lg-block">Cast</h1>
+            <!--<h1 class="horizontal_text d-none d-lg-block">Cast</h1>-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="serction_title_large mb-95">
+                            <h3>
+                                Cast in {{ object.title }}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center justify-content-between no-gutters" align="center" >
+                    {% for item in items %}                
+                    <div class="col-md-2 ">
+                        <div class="single_speaker">
+                            <div class="speaker_thumb">
+                            <img border="0" src="{{ item.photo }}" alt="Cannot load photo, sorry!" width="200" height="260"
+                                style="padding: 10px; object-fit:cover;">
+                                <div class="hover_overlay" style="top:80%">
+                                    <div class="speaker_name text-center">
+                                    <h4 style="text-align: center; padding-top:10px"">{{ item.name }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- speakers_end-->
+
+    <div class="Layer" id="layer"></div>
+    <div id="container">
+        {% if object %}
+
+            <div id="detail-infro">
+                <h1>{{ object.title }} ({{ object.year }}) </h1>
+                {% if  user.is_authenticated %}
+                    <button class="add_button" id="seen">Have seen</button>
+                    <!--<button class="add_button" id="expect">Want to see</button>-->
+                    <b style="color: #f44336" id="message"></b>
+                    {% if  object.flag == 1 %}
+                        <script>
+                            $("#seen").css({"background-color": "#f44336", "color": "white"});
+                        </script>
+                    {% endif %}
+                    {% if  object.flag == 2 %}
+                        <script>
+                            $("#expect").css({"background-color": "#f44336", "color": "white"});
+                        </script>
+                    {% endif %}
+                {% endif %}
+                <script>
+                    $(document).ready(function () {
+                        $("#seen").click(function () {
+                            $.get("/movie/add_seen/{{ object.movieid }}", function (msg) {
+                                if (msg == "1") {
+                                    $("#seen").css({"background-color": "#f44336", "color": "white"});
+                                    $("#expect").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Added to Seen list!").fadeIn("fast").fadeOut("slow");
+                                }
+                                if (msg == "0") {
+                                    $("#seen").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Deleted from Seen list!").fadeIn("fast").fadeOut("slow");
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $("#expect").click(function () {
+                            $.get("/movie/add_expect/{{ object.movieid }}", function (msg) {
+                                if (msg == "2") {
+                                    $("#expect").css({"background-color": "#f44336", "color": "white"});
+                                    $("#seen").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Added to Wish list!").fadeIn("fast").fadeOut("slow");
+                                }
+                                if (msg == "0") {
+                                    $("#expect").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Deleted from Wish list!").fadeIn("fast").fadeOut("slow");
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(function () {
+                        $('span.stars').stars();
+                    });
+                    $.fn.stars = function () {
+                        return $(this).each(function () {
+                            $(this).html($('<span />').width(Math.max(0, (Math.min(10, parseFloat($(this).html())))) * 8));
+                        });
+                    }
+
+                </script>
+                <!-- Layer -->
+                {#                <div class="Layer" id="layer"></div>#}
+
+                <!--<h4 id="summary" align=""><b>Plot Summary: </b>"{{ object.plot }}"</h4>-->
+                <h4 id="summary" align="justify">{{ object.plot }}</h4>
+                <!--<p><b>Year:</b> {{ object.year }}</p>-->
+                <p><b>Genres:</b> {{ object.genres }}</p>
+                <p><b>Runtime:</b> {{ object.length }} minutes</p>
+                <span class="stars">{{ object.rate }}</span>
+                <p><b>Rating:</b> {{ object.rate }}/10</p>
+                <!--<p><a href="http://www.imdb.com/title/{{ object.movieid }}" target="_blank">See in IMDB <span
+                        class="glyphicon glyphicon-new-window"></span></a></p>-->
+                <!--<span class="click_Show"> <button class="button_trailer">
+                <span class="glyphicon glyphicon-play-circle"></span> Trailer</button>
+                </span>
+
+                <div id="TrailerWindow" style="position: fixed;">
+                    <div id="title">{{ object.title }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div id="videoControl">
+                        <video width="600" height="500" controls>
+                            <source src="{{ object.trailer }}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>-->
+
+
+            </div>
+
+            <div id="main-pic">
+                <img border="0" src="{{ object.poster }}" alt="Cannot load photo, sorry!" width="300" height="500">
+            </div>            
+        {% endif %}
+
+
+
+
+        {% if pages %}
+            <p>You are in the {{ current_page }} page, {{ page_number }} pages in total</p>
+            {% if current_page != 1 %}
+                <a href="/movie/actor_all/{{ 1 }}" target="_self">First</a>
+                <a href="/movie/actor_all/{{ current_page|add:-1 }}" target="_self">Previous</a>
+            {% endif %}
+
+            {% for page in pages %}
+                {% if page == current_page %}
+                    <b>{{ page }}</b>
+                {% else %}
+                    <a href="/movie/actor_all/{{ page }}" target="_self">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if current_page != page_number %}
+                <a href="/movie/actor_all/{{ current_page|add:1 }}" target="_self">Next</a>
+                <a href="/movie/actor_all/{{ page_number }}" target="_self">Last</a>
+            {% endif %}
+        {% endif %}
+
+
+        <script type="text/javascript">
+            function layersize() {
+                document.getElementById("layer").style.width = document.documentElement.scrollWidth + "px";
+                document.getElementById("layer").style.height = document.documentElement.scrollHeight + "px";
+            }
+
+            $(".click_Show").click(function () {
+                layersize();
+                $(".Layer").show();//show layer
+                $("#TrailerWindow").show();//show videoWindow
+                tm();
+            });
+
+            $(window).resize(function () {
+                layersize();
+                tm();
+            });
+
+            function tm() {
+                var _left = (document.documentElement.clientWidth - $("#TrailerWindow").width()) / 2;//Get distance of left
+                var _top = (document.documentElement.clientHeight) * 0.15;//Get distance of top
+                $("#TrailerWindow").css({left: _left, top: _top});
+            }
+
+            $("button.close").click(function () {
+                $('video').trigger('pause');
+                $("#TrailerWindow").hide();//hide
+                $(".Layer").hide();//hide
+            });
+        </script>
+
+        <!--Drag-->
+        <script type="text/javascript">
+            window.onload = function () {
+                init(document.getElementById("title"));
+            };
+
+            var l = 0, t = 0, x = 0, y = 0;
+            var isOver = false;
+            var zindex = 99999;
+
+            function init(titleDom) {
+                var thisDom = titleDom;
+                var parentDom = thisDom.parentNode;
+                titleDom.onmousedown = function (event) {
+                    var e = event || window.event;
+                    x = e.clientX;
+                    y = e.clientY;
+                    l = parseInt(parentDom.offsetLeft);
+                    t = parseInt(parentDom.offsetTop);
+                    isOver = true;
+                    zindex++;
+                    parentDom.style.zIndex = zindex;
+                    document.onmousemove = function (event) {
+                        if (isOver) {
+                            var e = event || window.event;
+                            var newLeft = l + e.clientX - x;
+                            var newTop = t + e.clientY - y;
+                            parentDom.style.left = newLeft + "px";
+                            parentDom.style.top = newTop + "px";
+
+                        }
+                    };
+                    document.onmouseup = function (event) {
+                        if (isOver) {
+                            isOver = false;
+                        }
+                    };
+                };
+            }
+        </script>
+
+    </div>
+{% endblock %}
+

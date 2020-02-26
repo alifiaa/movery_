@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+    {% block link %}
+    {% load static %}
+    <script src="{% static "static1/js/jquery-1.10.2.min.js.download" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'static1/css/base.css' %}"/>
+    {% endblock %}
+
+{% block mainbody %}
+    <div class="about_area" style="padding-top: 40px; background: rgba(245, 245, 245, 0.5);"> 
+    <div id="container" >
+        {% if object %}
+        <div class="row align-items-center" >
+                <div class="col-xl-6 col-md-6">
+                    <div class="about_thumb" style="">
+                        <img src="{{ object.poster }} " style="width: 70%;display: block; margin-left: auto; margin-right: auto;" alt="Cannot load photo, sorry!">
+                        <!--<img border="0" src="{{ object.poster }}" alt="Cannot load photo, sorry!" width="300" height="500">-->
+                    </div>
+                </div>
+
+            <div class="col-xl-5 offset-xl-1 col-md-6" style="margin-left: 50px;">
+                <div class="about_info" ">
+                    <div class="section_title">
+                        <h1>{{ object.title }} ({{ object.year }}) </h1>
+                {% if  user.is_authenticated %}
+                    <button class="add_button" id="seen" style=" border:none;">Have seen</button>
+                    <b style="color: #f44336" id="message"></b>
+                    </div>      
+
+                    {% if  object.flag == 1 %}
+                        <script>
+                            $("#seen").css({"background-color": "#f44336", "color": "white"});
+                        </script>
+                    {% endif %}
+                    {% if  object.flag == 2 %}
+                        <script>
+                            $("#expect").css({"background-color": "#f44336", "color": "white"});
+                        </script>
+                    {% endif %}
+                {% endif %}
+                <script>
+                    $(document).ready(function () {
+                        $("#seen").click(function () {
+                            $.get("/movie/add_seen/{{ object.movieid }}", function (msg) {
+                                if (msg == "1") {
+                                    $("#seen").css({"background-color": "#f44336", "color": "white"});
+                                    $("#expect").css({"background-color": "#fdf9f9", "color": "red"});
+                                    $("#message").html(" Added to Seen list!").fadeIn("slow").fadeOut(3000);
+                                }
+                                if (msg == "0") {
+                                    $("#seen").css({"background-color": "#fdf9f9", "color": "red"});
+                                    $("#message").html(" Deleted from Seen list!").fadeIn("slow").fadeOut(3000);
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $("#expect").click(function () {
+                            $.get("/movie/add_expect/{{ object.movieid }}", function (msg) {
+                                if (msg == "2") {
+                                    $("#expect").css({"background-color": "#f44336", "color": "white"});
+                                    $("#seen").css({"background-color": "#fdf9f9", "color": "red"});
+                                    $("#message").html("Added to Wish list!").fadeIn("slow").fadeOut("slow");
+                                }
+                                if (msg == "0") {
+                                    $("#expect").css({"background-color": "#fdf9f9", "color": "red"});
+                                    $("#message").html("Deleted from Wish list!").fadeIn("slow").fadeOut("slow");
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(function () {
+                        $('span.stars').stars();
+                    });
+                    $.fn.stars = function () {
+                        return $(this).each(function () {
+                            $(this).html($('<span />').width(Math.max(0, (Math.min(10, parseFloat($(this).html())))) * 8));
+                        });
+                    }
+
+                </script>
+                <!-- Layer -->
+                <h4 style="text-align: justify; padding-top: 20px;">"{{ object.plot }}"</h4>
+                <h4 style="padding-top: 15px;"><b>Genres  : </b> {{ object.genres }}</h4>
+                <h4 style="padding-top: 15px;"><b>Runtime : </b> {{ object.length }} minutes</h4>
+                <h4 style="padding-top: 15px;"><b>Rating  : </b> {{ object.rate }}/10</h4>
+                <!--<h4 style="padding-top: 15px;"><a href="http://www.imdb.com/title/{{ object.movieid }}" target="_blank"> See in IMDB <span
+                        class="glyphicon glyphicon-new-window"></span></a></h4>-->
+                <!--<span class="click_Show" style="padding-top: 15px;"></span> <button class="button_trailer">
+                <span class="glyphicon glyphicon-play-circle" style="padding-top: 15px;"></span> Trailer</button>
+                </span>
+
+                <div id="TrailerWindow" style="position: fixed;">
+                    <div id="title">{{ object.title }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div id="videoControl">
+                        <video width="600" height="500" controls>
+                            <source src="{{ object.trailer }}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- speakers_start -->
+        <div class="speakers_area">
+            <h1 class="opcity_text d-none d-lg-block">Cast</h1>
+            <!--<h1 class="horizontal_text d-none d-lg-block">Cast</h1>-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="serction_title_large mb-95">
+                            <h3>
+                                Cast in {{ object.title }}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center justify-content-between no-gutters" align="center" >
+                    {% for item in items %}                
+                    <div class="col-md-2 ">
+                        <div class="single_speaker">
+                            <div class="speaker_thumb">
+                            <img border="0" src="{{ item.photo }}" alt="Cannot load photo, sorry!" width="200" height="260"
+                                style="padding: 10px; object-fit:cover;">
+                                <div class="hover_overlay" style="top:80%">
+                                    <div class="speaker_name text-center">
+                                    <h4 style="text-align: center; padding-top:10px"">{{ item.name }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- speakers_end-->
+    </div>
+
+<!--    <div id="container" style="padding-top:60px;">
+            <div class="col-xl-12">
+                <div class="serction_title_large mb-95">
+                    <h3>
+                        Cast in {{ object.title }}
+                    </h3>
+                </div>
+            </div>
+        {% endif %}
+                
+        <div class="row">
+            {% for item in items %}
+                <div class="col-md-4">                    
+					<div class="single-defination" align="center">   
+                        <row style="height:286px;"><img border="0" src="{{ item.photo }}" alt="Cannot load photo, sorry!" width="180" height="250"
+                            style="padding: 10px;"></row>
+                        <row style="height:56px;"><h4>{{ item.name }}</h4></row>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        {% if pages %}
+            <p>Page {{ current_page }} of {{ page_number }} pages</p>
+            {% if current_page != 1 %}
+                <a href="/movie/actor_all/{{ 1 }}" target="_self"><i class="fa fa-angle-double-left" aria-hidden="true" style="padding-right:5px;"></i></a>
+                <a href="/movie/actor_all/{{ current_page|add:-1 }}" target="_self"><i class="fa fa-angle-left" style="padding-right:5px;" aria-hidden="true"></i></a>
+            {% endif %}
+
+            {% for page in pages %}
+                {% if page == current_page %}
+                    <b>{{ page }}</b>
+                {% else %}
+                    <a href="/movie/actor_all/{{ page }}" target="_self">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if current_page != page_number %}
+                <a href="/movie/actor_all/{{ current_page|add:1 }}" target="_self"><i class="fa fa-angle-right" style="padding-left:5px;" aria-hidden="true"></i></a>
+                <a href="/movie/actor_all/{{ page_number }}" target="_self"><i class="fa fa-angle-double-right" style="padding-left:5px;" aria-hidden="true"></i></a>
+            {% endif %}
+        {% endif %}
+    </div>
+-->
+
+        <script type="text/javascript">
+            function layersize() {
+                document.getElementById("layer").style.width = document.documentElement.scrollWidth + "px";
+                document.getElementById("layer").style.height = document.documentElement.scrollHeight + "px";
+            }
+
+            $(".click_Show").click(function () {
+                layersize();
+                $(".Layer").show();//show layer
+                $("#TrailerWindow").show();//show videoWindow
+                tm();
+            });
+
+            $(window).resize(function () {
+                layersize();
+                tm();
+            });
+
+            function tm() {
+                var _left = (document.documentElement.clientWidth - $("#TrailerWindow").width()) / 2;//Get distance of left
+                var _top = (document.documentElement.clientHeight) * 0.15;//Get distance of top
+                $("#TrailerWindow").css({left: _left, top: _top});
+            }
+
+            $("button.close").click(function () {
+                $('video').trigger('pause');
+                $("#TrailerWindow").hide();//hide
+                $(".Layer").hide();//hide
+            });
+        </script>
+
+        <!--Drag-->
+        <script type="text/javascript">
+            window.onload = function () {
+                init(document.getElementById("title"));
+            };
+
+            var l = 0, t = 0, x = 0, y = 0;
+            var isOver = false;
+            var zindex = 99999;
+
+            function init(titleDom) {
+                var thisDom = titleDom;
+                var parentDom = thisDom.parentNode;
+                titleDom.onmousedown = function (event) {
+                    var e = event || window.event;
+                    x = e.clientX;
+                    y = e.clientY;
+                    l = parseInt(parentDom.offsetLeft);
+                    t = parseInt(parentDom.offsetTop);
+                    isOver = true;
+                    zindex++;
+                    parentDom.style.zIndex = zindex;
+                    document.onmousemove = function (event) {
+                        if (isOver) {
+                            var e = event || window.event;
+                            var newLeft = l + e.clientX - x;
+                            var newTop = t + e.clientY - y;
+                            parentDom.style.left = newLeft + "px";
+                            parentDom.style.top = newTop + "px";
+
+                        }
+                    };
+                    document.onmouseup = function (event) {
+                        if (isOver) {
+                            isOver = false;
+                        }
+                    };
+                };
+            }
+        </script>
+
+{% endblock %}
+

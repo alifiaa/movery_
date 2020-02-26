@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+<style>
+.col-md-4{
+    height: 378px;
+}
+</style>
+
+{% block mainbody %}
+{% load static %}
+	<div class="whole-wrap" style="background: rgba(245, 245, 245, 0.5); padding-bottom: 35px;" >
+		<div class="container box_1170" >
+			<div class="section-top-border">
+                <div class="col-xl-12">
+                    <div class="serction_title_large mb-95">
+                        <h3>
+                            What is  <span style="background-color:#1a1a1a;color:white;">&nbsp;MOVERY </span>&nbsp;?
+                        </h3>
+                    </div>
+                    <div style=" padding-left: 76px; padding-right: 76px;">
+                        <h1 style="font-size: 60px;">
+                            Movery  
+                            <span style="font-size:25px">
+                                \ ˈmo͞o-v(ə-)rē  \
+                            </span>
+                        </h1>   
+                        <p style="font-size: 20px; padding-left:20px;"><i>noun</i></p>
+                        <h1 style="font-size:23px;text-align: justify; line-height:2;">
+                            The place where you can discover lots of new movies and you will definitely like.
+                            You will feel fitted with every movie offered by Movery.
+                        </h1>
+                    </div>
+                </div>
+			</div>
+        </div>
+    </div>
+
+    <!-- faq_area_Start -->
+    {% load static %}
+    <div class="faq_area resister_bg_1" style="background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;background-image: {% static "img/banner/resister.png" %};"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="serction_title_large mb-95">
+                        <h3>
+                            More About Movery
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse"
+                                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        {% load static %}
+                                        <img src="{% static "img/barnd/info.png" %}" alt=""> What is Movery?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion"
+                                style="">
+                                <div class="card-body" style="padding-right: 76px; text-align: justify; line-height:2.5;">
+                                    Movery or Movie Discovery is a movie service site that allows our members to get a recommendation of movies based on movie they already watch before. With Movery, you can enjoy new movie you will definitely like without confused and without dissapointed. There's always better recommendations with more movie you watch.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="heading_4">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse"
+                                        data-target="#collapse_4" aria-expanded="false" aria-controls="collapse_4">
+                                        {% load static %}
+                                        <img src="{% static "img/barnd/info.png" %}" alt=""> How can I start using Movery?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapse_4" class="collapse" aria-labelledby="heading_4" data-parent="#accordion"
+                                style="">
+                                <div class="card-body" style="padding-right: 76px; text-align: justify; line-height:2.5;">
+                                    Start now! <br>
+                                    Follow next easy steps for discover your next favorite movies:<br>
+                                    &emsp; 1. Make new account on <a href="/user/register/">register</a> menu, then fill register form with username, password, and confirmation password.<br>
+                                    &emsp; 2. Login with your account, fill username and password.<br>
+                                    &emsp; 3. Search the movie you've watch and select have seen button. You should select at least one movie.<br>
+                                    &emsp; 4. Click Recommendations menu. <br>
+                                    &emsp; 5. Thats all. Get your recommendation movies now!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse"
+                                        data-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        {% load static %}
+                                        <img src="{% static "img/barnd/info.png" %}"  alt=""> Is Movery free or fee needed?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                data-parent="#accordion" style="">
+                                <div class="card-body" style="padding-right: 76px; text-align: justify; line-height:2.5;">
+                                    As a Movery member, you will not be asked for the slightest fee from the day you register until anytime. 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- faq_area_end -->
+
+{% endblock %}

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static "img/logo-mini.png" %}">
+    <title>    {% block title %} Movie Discovery {% endblock %} </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static "css/magnific-popup.css" %}">
+    <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/themify-icons.css" %}">
+    <link rel="stylesheet" href="{% static "css/nice-select.css" %}">
+    <link rel="stylesheet" href="{% static "css/flaticon.css" %}">
+    <link rel="stylesheet" href="{% static "css/animate.css" %}">
+    <link rel="stylesheet" href="{% static "css/slicknav.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" id="bootstrap-css">
+    <link rel="stylesheet" href="{% static "css/owl.carousel.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/owl.theme.default.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    {% block link %}
+    {% endblock %}
+    <!--<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" id="bootstrap-css">
+    <link href="{% static "css/navbar.css" %}" rel="stylesheet">
+    <script src="{% static "js/jquery-1.10.2.min.js.download" %}"></script>
+    <script src="{% static "js/bootstrap.min.js.download" %}"></script>
+    <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap-social.css" %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
+    <style type="text/css"></style>-->
+
+<style>
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+/****** LOGIN MODAL ******/
+.loginmodal-container {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  background-color: #F7F7F7;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  font-family: roboto;
+}
+
+.loginmodal-container h1 {
+  text-align: center;
+  font-size: 1.8em;
+  font-family: roboto;
+}
+
+.loginmodal-container input[type=submit] {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.loginmodal-container input[type=text], input[type=password] {
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.loginmodal-container input[type=text]:hover, input[type=password]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.loginmodal {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+/* border-radius: 3px; */
+/* -webkit-user-select: none;
+  user-select: none; */
+}
+
+.loginmodal-container a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.6;
+  transition: opacity ease 0.5s;
+} 
+
+.login-help{
+  font-size: 12px;
+}
+
+.section-top-border{
+    padding: 40px;
+}
+
+</style>
+
+</head>
+
+{% load static %}
+<body>
+        <header>
+                <div class="header-area ">
+                    <div id="sticky-header" class="main-header-area ">
+                        <div class="container-fluid p-0">
+                            <div class="row align-items-center justify-content-between no-gutters">
+                                <div class="col-xl-2 col-lg-2">
+                                    <div class="logo-img">
+                                        <a href="/">
+                                            <img src="{% static "img/logo-movery.png" %}" style="max-width:120%;" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="main-menu  d-none d-lg-block">
+                                        <nav>
+                                            <ul id="navigation">
+                                                <li><a class="" href="/">Home</a></li>
+                                                <li><a href="/movie/movie_all/1">Movie List</a></li>
+                                                <li><a href="/movie/aboutus/">About Us</a></li>
+                                                <li><a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a></li>
+
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="d-none d-lg-block">
+                                    <div class="main-menu  d-none d-lg-block">
+                                        <nav>
+                                            <ul>
+                                                {% if user.is_authenticated %}
+                                                    <li><a href="#"> Hello, {{ user.username }}  <i class="ti-angle-down"></i></a>
+                                                        <ul class="submenu">
+                                                            <li><a href="/movie/genre_select/">Genres</a></li>
+                                                            <li><a href="/movie/seen/">Seen List</a></li>
+                                                            <li><a href="/movie/recommendation/">Recommendation</a></li>
+                                                            <li style="justify-content: center;"><button class="btn btn-tumblr" onclick="logout()" 
+                                                                style=" width: 100%; background-color: transparent; color:black;"> 
+                                                                Logout</button></li>
+                                                        </ul>
+                                                    </li>
+
+                                                {% else %}
+                                                    <!--<li class="dropdown"><button id="myBtn">Login</button>-->
+                                                        <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                                                        
+                                                    <a href="/user/register/" class="boxed-btn-white" 
+                                                    style="padding-top: 15px; padding-bottom: 15px; padding-left: 10px; padding-right: 10px;
+                                                    ">Register</a>
+                                                {% endif %}
+
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mobile_menu d-block d-lg-none"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="search_input" id="search_input_box" style="z-index:50;">
+                            <div class="container " >
+                                <form class="d-flex justify-content-between search-inner" style="color:whitesmoke; width: 998px;" id="search--form" onsubmit="searchSubmit()">
+                                    {% csrf_token %}
+
+                                    <input type="text" name="title" id="search-input" class="form-control"
+                                        placeholder="Search Movies" style="background-color:transparent; z-index:50; width: 976px; background-color:#f5f5f5; "
+                                        onkeyup="start_timer()" size="35" autocomplete="off" required/>
+                                    <!--<button type="submit" class="btn" name="search" value="Submit" class="btn" style="background-color: #fae1e1;">
+                                    </button>-->
+                                    <span class="ti-close" id="close_search" title="Close Search" style="background-color: #transparent;"></span>
+
+                                    <div class="searchlistdiv" class="col-lg-6"
+                                        style="position:absolute;top:159px;left:166px;user-select:none;display:none;width: 976px; background-color:whitesmoke; color:red; z-index:50; "
+                                        aria-expanded="false" >
+                                        <div class="search-movie"></div> <br>
+                                        <!--color di stylecss line 2899
+                                            <div class="search-movie">Movie:</div>
+                                        <div class="search-actor">Actor:</div>-->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                            {% if message %}
+                                <div class="alert alert-warning alert-dismissible" style="z-index: 99;">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                    </div>
+
+                </div>
+            
+            </header>
+            <!-- header-end -->
+     
+    {% load static %}
+    
+    <div class="modal fade" id="login-modal" role="dialog" >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h2 class="modal-title" text-center>Login</h2>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body mx-4">
+                    <form class="form" role="form" method="post" action="/user/login/">
+                    {% csrf_token %}
+							<div class="form-group input-group-icon mt-10">
+								<div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+								<input type="text" name="username" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'"
+								 required class="single-input">
+                            </div>
+                            <div class="form-group input-group-icon mt-10">
+								<div class="icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
+								<input type="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'"
+								 required class="single-input"  style="background: #f9f9ff; border: none; outline: none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" name="path" value="{{ request.path }}">
+                                <input type="submit" name ="login"class="btn genric-btn success circle btn-block"  class="login loginmodal-submit" value="Login"/>
+                            </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="register-modal" role="dialog" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h2 class="modal-title" text-center>Register</h2>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body mx-4">
+                    <form class="form" role="form" method="post" action="/user/login/">
+                    {% csrf_token %}
+							<div class="form-group input-group-icon mt-10">
+								<div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+								<input type="text" name="username" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'"
+								 required class="single-input">
+                            </div>
+                            <div class="form-group input-group-icon mt-10" style="">
+								<div class="icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
+								<input type="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'"
+								 required class="single-input">
+                            </div>
+                            <div class="form-group input-group-icon mt-10" style="">
+                                    <div class="icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
+                                    <input type="password" name="password2" placeholder="Password Confirmation" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password Confirmation'"
+                                     required class="single-input">
+                            </div>
+    
+                            <div class="form-group">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" name ="register"class="btn genric-btn success circle btn-block"  class="login loginmodal-submit" value="Login"/>
+                            </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% load static %}
+
+    <!-- slider_area_start -->
+    <div class="slider_area slider_bg_1" style="min-height:100vh">
+        {% block mainbody %}
+        <style>
+        .section-top-border:hover{
+            background-color: #ffe6e6;
+            border:#ff9999;
+        }
+
+        </style>
+        <div class="slider_text" style="height:645px;">
+            <div class="container">
+                <div class="position_relv">
+                   <!--<h1 class="opcity_text d-none d-lg-block">MOVERY</h1>-->
+                    <div class="row">
+                        <div class="col-xl-9">
+                            <div class="title_text">
+                                <h3> <span style=color:white;">Meet</span> Your Next <br>
+                                    Favorite <span style=color:white;">Movie</span><br>
+                                    </h3>
+                                <p style="color: white; padding-bottom:40px;">Here you can discover new movie you will like based on your <br>
+                                    recent watched movies.
+                                    Get better recommendations the more you watch.
+                                </p>
+                                {% if user.is_authenticated %}
+
+                                <a href="/movie/recommendation/" class="boxed-btn-red">Get Recommendation</a>
+                                <a href="/movie/seen/" class="boxed-btn-white">Seen List</a>
+
+                                {% else %}
+                                
+                                <a href="#" data-toggle="modal" data-target="#login-modal" class="boxed-btn-red">Get Started</a>
+                                <!-- <a href="#" data-toggle="modal" data-target="#register-modal" class="boxed-btn-white">Sign Up For Free</a>-->
+                                <a href="/user/register/" class="boxed-btn-white">Sign Up For Free</a>
+
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Align Area -->
+        <div class="whole-wrap" style="background-color: white; padding-top:50px; padding-bottom:50px;">
+            <div class="container box_1170">
+                <div class="text-center" style="padding-top: 30px; padding-bottom: 30px;">
+                    <div class="row">
+                        <div class="col-xl-12" >
+                                <h1 style="color:black; font-weight: bold;">Easy Step to <br> Get Recommendations</h1>
+                        </div>
+                    </div>
+                </div>                
+                <div class="section-top-border two">
+                    <!--<h3 class="mb-30">1</h3>-->
+                    <div class="row">
+                        <div class="col-md-3">
+                            {% load static %}
+                                <img src="{% static "img/number/one.png" %}" alt="" style="width:30%; float:right;" class="img-fluid">
+                        </div>
+                        <div class="col-md-9 mt-sm-20" style="padding-right:250px;">
+                            <p>Make new account on <a href="/user/register/">register</a>  menu, then fill register form with username, password, and confirmation password.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-top-border two text-right">
+                    <!--<h3 class="mb-30">2</h3>-->
+                    <div class="row">
+                        <div class="col-md-9" style="padding-left:250px;">
+                            <p class="text-right">Login with your account, fill username and password.</p>
+                        </div>
+                        <div class="col-md-3">
+                            {% load static %}
+                                <img src="{% static "img/number/two.png" %}" alt="" style="width:30%; float:left;" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="section-top-border two">
+                    <!--<h3 class="mb-30">3</h3>-->
+                    <div class="row">
+                        <div class="col-md-3">
+                            {% load static %}
+                            <img src="{% static "img/number/three.png" %}" style="width:30%; float:right;" alt="" class="img-fluid">                        </div>
+                        <div class="col-md-9 mt-sm-20" style="padding-right:250px;">
+                            <p>Search the movie you've watch and select have seen button. You should select at least one movie.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-top-border two text-right">
+                    <!--<h3 class="mb-30">4</h3>-->
+                    <div class="row">
+                        <div class="col-md-9" style="padding-left:250px;">
+                            <p class="text-right">Click Recommendations menu.</p>
+                        </div>
+                        <div class="col-md-3">
+                            {% load static %}
+                            <img src="{% static "img/number/four.png" %}" alt="" style="width:30%; float:left;" class="img-fluid">                        </div>
+                    </div>
+                </div>
+                <div class="section-top-border two">
+                    <!--<h3 class="mb-30">5</h3>-->
+                    <div class="row">
+                        <div class="col-md-3">
+                            {% load static %}
+                            <img src="{% static "img/number/five.png" %}" alt="" style="width:30%; float:right;" class="img-fluid">                        </div>
+                        <div class="col-md-9 mt-sm-20" style="padding-right:250px;">
+                            <p>Thats all. Get your recommendation movies now!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end aligned-->
+
+        {% endblock %}
+
+
+    <!-- footer_start -->
+    <footer class="footer footer_bg_1" style="background: none;">
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;2020 All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by Alifia Rahma (@alifiarf)</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </div>
+
+<script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '283394035432709',
+            cookie: true,
+            xfbml: true,  // parse social plugins on this page
+            version: 'v2.8' // use graph api version 2.8
+        });
+
+        FB.getLoginStatus(function (response) {
+        });
+
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    function logout() {
+        FB.logout(function () {
+        });
+        $.get("/user/logout/", function () {
+            location.reload();
+        });
+        {#        location.href = "/user/logout/";#}
+    }
+
+    function login() {
+        FB.login(function (response) {
+            if (response.status === 'connected') {
+                FB.api('/me', function (response) {
+                    $.post("/user/facebook/", {
+                        csrfmiddlewaretoken: getCookie('csrftoken'),
+                        username: response.name,
+                        password: "facebook"
+                    }, function () {
+                        location.reload();
+                    });
+                });
+            }
+        });
+    }
+</script>
+
+<script>
+    function searchSubmit() {
+        var action_src = '/movie/search/movie/' + document.getElementById("search-input").value + '/1';
+        document.getElementById('search--form').action = action_src;
+    }
+
+    $(".form-control").bind('blur', function () {
+        setTimeout(function () {
+            $(".searchlistdiv").hide();
+        }, 150);
+    });
+    var last_input_time = Date.now();
+
+    function start_timer() {
+        var this_input_time = Date.now();
+        last_input_time = this_input_time;
+        setTimeout(
+            function (this_input_time) {
+                if (last_input_time === this_input_time)
+                    showResult(document.getElementById('search-input').value);
+            }, 150, this_input_time);
+    }
+
+    function showResult(str) {
+        if (str.length === 0) {
+            $(".searchlistdiv").hide();
+            return;
+        }
+        var path = "/movie/search_suggest/" + str;
+        $.get(path, function (data) {
+            data = JSON.parse(data);
+            if (document.getElementById('search-input').value !== data.text)
+                return;
+            $(".search-movie").siblings().not(".search-actor").remove();
+            for (var i = data.movie.length - 1; i >= 0; i--) {
+                var img = "<img src='" + data.movie[i].poster + "' width='60' height='75'></img>";
+                var link = "<div class='suggest' onclick=\"location.href='/movie/movie_detail/"
+                    + data.movie[i].movieid + "'\">" + img + "<b>" + data.movie[i].title + "</b></div>";
+                $(".search-movie").after(link)
+            }
+            if (data.movie.length === 0)
+                $(".search-movie").after("<div class='no_suggest'><b>No suggestion!</b></div>")
+
+            for (var i = data.actor.length - 1; i >= 0; i--) {
+                var img = "<img src='" + data.actor[i].photo + "' width='60' height='75'></img>";
+                var link = "<div class='suggest' onclick=\"location.href='/movie/actor_detail/"
+                    + data.actor[i].actorid + "'\">" + img + "<b>" + data.actor[i].name + "</b></div>";
+                $(".search-actor").after(link)
+            }
+            if (data.actor.length === 0)
+                $(".search-actor").after("<div class='no_suggest'><b>No suggestion!</b></div>")
+
+            $(".searchlistdiv").show();
+        });
+    }
+</script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
+
+    <script src="{% static "js/bootstrap.min.js.download" %}"></script>
+    <!-- JS here -->
+    <script src="{% static "js/vendor/modernizr-3.5.0.min.js" %}"></script>
+    <script src="{% static "js/vendor/jquery-1.12.4.min.js" %}"></script>
+    <script src="{% static "js/popper.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/owl.carousel.min.js" %}"></script>
+    <!--<script src="{% static "js/isotope.pkgd.min.js" %}"></script>
+    <script src="{% static "js/ajax-form.js" %}"></script>
+    <script src="{% static "js/waypoints.min.js" %}"></script>
+    <script src="{% static "js/jquery.counterup.min.js" %}"></script>
+    <script src="{% static "js/imagesloaded.pkgd.min.js" %}"></script>
+    <script src="{% static "js/scrollIt.js" %}"></script>
+    <script src="{% static "js/jquery.scrollUp.min.js" %}"></script>
+    <script src="{% static "js/wow.min.js" %}"></script>
+    <script src="{% static "js/nice-select.min.js" %}"></script>
+    <script src="{% static "js/jquery.slicknav.min.js" %}"></script>
+    <script src="{% static "js/jquery.magnific-popup.min.js" %}"></script>
+    <script src="{% static "js/jquery.countdown.js" %}"></script>-->
+    <script src="{% static "js/plugins.js" %}"></script>
+
+    <!--contact js-->
+    <script src="{% static "js/contact.js" %}"></script>
+    <script src="{% static "js/jquery.ajaxchimp.min.js" %}"></script>
+    <script src="{% static "js/jquery.form.js" %}"></script>
+    <script src="{% static "js/jquery.validate.min.js" %}"></script>
+
+    <script src="{% static "js/main.js" %}"></script>
+
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
+
+</body>
+</html>

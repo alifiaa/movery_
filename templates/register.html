@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %} Register - Movie Discovery {% endblock %}
+
+{% block mainbody %}
+{% load static %}
+
+<style>
+.helptext{
+    display: none;
+}
+.about_area .about_info p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.about_area .about_info li {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.about_area .about_info label {
+    width: 100%;
+    color: black;
+}
+.about_area .about_info input {
+    width: 100%;
+    height: 44px;
+    padding:10px;
+    border: none;
+    outline: none;
+    background: #f9f9ff;
+    border-radius: 3px;
+
+}
+.serction_title_large h3::before {
+  top: 120%;
+  right: -0;
+}
+
+
+</style>
+
+        <!-- about_area_start -->
+        <div class="about_area" style="padding-top: 40px; height:537px;">
+            <!--<div class="shape-1 d-none d-xl-block">
+                <img src="img/about/shap1.png" alt="">
+            </div>
+            <div class="shape-2 d-none d-xl-block">
+                <img src="img/about/shap2.png" alt="">
+            </div>-->
+            <div class="container">
+                <div class="row align-items-center" style="height:437px;">
+                    <div class="col-xl-6 col-md-6 ">
+                        <div class="serction_title_large mb-95" style="padding-left: 10%">
+                            <h3 align="right">
+                                Register
+                                Now
+                            </h3>
+                        </div>
+
+                    </div>
+                    {% if  user.is_authenticated %}
+
+                    path
+                    ('') ('base.html')
+
+                    {% endif %}
+
+                    <div class="col-xl-6 col-md-6">
+                        <div class="about_info" style="background: rgba(245, 245, 245, 0.5); width: 90%; padding:10px;  border-radius:13px;">
+                            <form action="" method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger alert-dismissible" style="z-index: 99; text-align: center;">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <strong>Registration failed. </strong> {{ error }}
+                                    </div>
+
+                                {% endif %}
+                        
+                                <div class="container" style="padding-top: 30px;
+                                padding-bottom: 30px;
+                                padding-right: 75px;
+                                padding-left: 75px;
+                                ">
+                                    {% csrf_token %}
+                                    <div style="justify-content: left; display: flex; flex-wrap: wrap; padding-top: 10px;">
+                                        
+                                            {{ form.as_ul}}
+                                        
+                                    </div>
+                                    <div> 
+                                        {% load static %}
+                                        <li style="text-align: right; font-size: small;"><a href="#" data-toggle="modal" data-target="#help-modal">
+                                            <img src="{% static "img/barnd/info.png" %}" alt=""> Requirement </a></li">
+                                    </div>
+
+                                    <div style="justify-content: center; display: flex; flex-wrap: wrap; padding-top: 10px;">
+                                        <button type="submit" class="btn genric-btn success circle" style="width: 50%;"> Register </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="help-modal" role="dialog" >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header ">
+                            <h2 class="modal-title" text-center>Requirement Registration</h2>
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body mx-4">
+                            <li style="font-weight: bold;">Username :</li> 
+                            <li>&nbsp; Can be filled with character</li><hr>
+                            <li style="font-weight: bold;">Password :</li>
+                            <li>&nbsp; Minimum 8 characters</li>
+                            <li>&nbsp; Can't numeric only</li><hr>
+                            <li style="font-weight: bold;">Password Confirmation :</li>
+                            <li>&nbsp; Same as password before</li>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        <!-- about_area_end -->
+        </div>
+{% endblock %}
+
+
+    <!--<h2 align="center"> Registration </h2>
+    <form action="" method="post">
+        {% if error %}
+            <div class="error">
+                <p style="color:red;">{{ error }}</p>
+            </div>
+        {% endif %}
+
+        <div class="container">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="login100-form-btn">Register</button>
+        </div>
+    </form>
+</div>-->
+

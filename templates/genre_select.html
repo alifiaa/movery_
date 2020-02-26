@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+<style>
+.col-md-4{
+    height: 378px;
+}
+</style>
+
+{% block mainbody %}
+{% load static %}
+	<div class="whole-wrap">
+		<div class="container box_1170" style="background: rgba(245, 245, 245, 0.5);" >
+			<div class="section-top-border">
+                <div class="col-xl-12">
+                    <div class="serction_title_large mb-95" style="margin-bottom: 70px;">
+                        <h3> Favourite Genres
+                        </h3>
+                        <h4 style="color: grey;"> Choose your favourite genres </h4 s>
+                        <!--<h4> {{ number }} movie(s) in your Seen List </h4>-->
+
+                    </div>
+                </div>
+                <div>
+                  <form style="text-align:center;">
+                    <div style="height: 50px;">
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                        <input type="checkbox" value="" style="margin-right: 25px;">Action
+                        </label>
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                        <input type="checkbox" value="" style="margin-right: 25px;">Adventure
+                        </label>
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                        <input type="checkbox" value="" style="margin-right: 25px;">Animation
+                        </label>
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                            <input type="checkbox" value="" style="margin-right: 25px;">Comedy
+                        </label>    
+                    </div>
+                    <div style="height: 50px;">
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                        <input type="checkbox" value="" style="margin-right: 25px;">Crime
+                        </label>
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                        <input type="checkbox" value="" style="margin-right: 25px;">Drama
+                        </label>
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                            <input type="checkbox" value="" style="margin-right: 25px;">Family
+                            </label>
+                            <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                            <input type="checkbox" value="" style="margin-right: 25px;">Horror
+                        </label>   
+                    </div>
+                    <div style="height: 50px;">
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                        <input type="checkbox" value="" style="margin-right: 25px;">Mystery
+                        </label>
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                        <input type="checkbox" value="" style="margin-right: 25px;">Romance
+                        </label>
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                        <input type="checkbox" value="" style="margin-right: 25px;">Thriller
+                        </label>
+                        <label class="checkbox-inline" style="padding-left: 50px; width: 200px;color: black;">
+                        <input type="checkbox" value="" style="margin-right: 25px;">War
+                        </label>
+                    </div>
+                    <button type="submit" class="btn genric-btn danger circle" style="width:;"> Save </button>
+                  </form>
+                </div>
+                <!--<div class="row">
+                    {% for item in items %}
+                    <div class="col-md-4"><a href="/movie/movie_detail/{{ item.movieid }}"
+                        target="_self">                        
+						<div class="single-defination" align="center">   
+                            <row style="height:286px;"><img border="0" src="{{ item.poster }}" alt="Cannot load photo, sorry!" width="180" height="250"
+                                style="padding: 10px;"></row>
+                            <row style="height:26;"><p class="stars">{{ item.rate }} / 10</p></row>
+                            <row style="height:56px;">    <h4>{{ item.title }} ({{ item.year }})</h4></row>
+                        </div>
+                    </a>
+                    <form role="form" action="/movie/seen/{{ item.movieid }}" method="post" align="center">
+                        {% csrf_token %}
+                        <button type="submit" class="btn genric-btn danger circle" style="width:;"> Delete </button>
+                    </form>        
+                    </div>
+
+                    {% endfor %}
+                </div>-->
+			</div>
+        </div>
+    </div>
+
+        {% if object %}
+            <div id=detail-infro>
+                <h1>{{ object.name }}</h1>
+                <p><a href="http://www.imdb.com/name/{{ object.actorid }}" target="_self">See in IMDB</a></p>
+            </div>
+            <div id="main-pic">
+                <img border="0" src="{{ object.photo }}" alt="Cannot load photo, sorry!" width="350" height="500">
+            </div>
+
+
+            <h2>{{ object.name }} in the following movie(s):</h2>
+            <hr>
+        {% endif %}
+
+        
+
+        <script>
+            $(function () {
+                $('span.stars').stars();
+            });
+            $.fn.stars = function () {
+                return $(this).each(function () {
+                    $(this).html($('<span />').width(Math.max(0, (Math.min(10, parseFloat($(this).html())))) * 8));
+                });
+            }
+
+        </script>
+
+{% endblock %}
+
+
